@@ -2,7 +2,8 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
-
+import GarderieInfo from "./components/GarderieInfo";
+import Activites from "./components/Activites";
 export default function Home() {
   return (
     <>
@@ -10,7 +11,9 @@ export default function Home() {
 
       <main>
         <Hero />
+        <GarderieInfo />
         <Services />
+        <Activites />
       </main>
 
       <footer id="contact" className="bg-primary text-white text-center py-4">
