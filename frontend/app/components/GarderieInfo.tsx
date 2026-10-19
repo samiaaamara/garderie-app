@@ -48,25 +48,89 @@ export default function GarderieInfo() {
   }, []);
 
   if (chargement) {
-    return <p className="text-center py-4">Chargement des informations...</p>;
-  }
-
-  if (erreur || !garderie) {
     return (
-      <p className="alert alert-danger">
-        {erreur || "Aucune information disponible."}
+      <p className="text-center py-5">
+        Chargement des informations...
       </p>
     );
   }
 
+  if (erreur || !garderie) {
+    return (
+      <div className="container py-4">
+        <p className="alert alert-danger">
+          {erreur || "Aucune information disponible."}
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <section className="container py-5">
-      <div className="card border-0 shadow-sm rounded-4 p-4">
-        <h2 className="text-primary fw-bold">{garderie.nom}</h2>
-        <p>{garderie.description}</p>
-        <p className="mb-1"><strong>Adresse :</strong> {garderie.adresse}</p>
-        <p className="mb-1"><strong>Téléphone :</strong> {garderie.telephone}</p>
-        <p className="mb-0"><strong>Email :</strong> {garderie.email}</p>
+    <section id="garderie" className="container section">
+      <div className="info-section">
+        <div className="row align-items-center g-4">
+          <div className="col-lg-5">
+            <img
+              src="https://images.unsplash.com/photo-1503919005314-30d93d07d823?auto=format&fit=crop&w=1000&q=80"
+              alt="Espace accueillant pour les enfants"
+              className="photo"
+              style={{ height: "280px" }}
+            />
+          </div>
+
+          <div className="col-lg-7">
+            <h2 className="mb-3">
+              🏡 {garderie.nom}
+            </h2>
+
+            <p className="mb-4">
+              {garderie.description}
+            </p>
+
+            <div className="row g-3">
+              <div className="col-md-6">
+                <div className="d-flex align-items-start gap-3">
+                  <span className="fs-3">📍</span>
+                  <div>
+                    <strong>Adresse</strong>
+                    <p className="mb-0">{garderie.adresse}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="d-flex align-items-start gap-3">
+                  <span className="fs-3">📞</span>
+                  <div>
+                    <strong>Téléphone</strong>
+                    <p className="mb-0">{garderie.telephone}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12">
+                <div className="d-flex align-items-start gap-3">
+                  <span className="fs-3">✉️</span>
+                  <div>
+                    <strong>Email</strong>
+                    <p className="mb-0">
+                      <a href={`mailto:${garderie.email}`}>
+                        {garderie.email}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <a
+              href={`mailto:${garderie.email}`}
+              className="btn-yellow mt-4"
+            >
+              Nous contacter 💛
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

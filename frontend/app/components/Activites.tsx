@@ -9,6 +9,27 @@ type Activite = {
   age: string;
 };
 
+const illustrations = [
+  {
+    icon: "🎨",
+    image:
+      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80",
+    alt: "Peinture et activités artistiques",
+  },
+  {
+    icon: "📚",
+    image:
+      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
+    alt: "Apprentissage et découverte",
+  },
+  {
+    icon: "🧸",
+    image:
+      "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=800&q=80",
+    alt: "Jeux et loisirs pour enfants",
+  },
+];
+
 export default function Activites() {
   const [activites, setActivites] = useState<Activite[]>([]);
   const [chargement, setChargement] = useState(true);
@@ -46,36 +67,75 @@ export default function Activites() {
   }, []);
 
   if (chargement) {
-    return <p className="text-center py-4">Chargement des activités...</p>;
+    return (
+      <p className="text-center py-5">
+        Chargement des activités...
+      </p>
+    );
   }
 
   if (erreur) {
-    return <p className="alert alert-danger">{erreur}</p>;
+    return (
+      <div className="container py-4">
+        <p className="alert alert-danger">{erreur}</p>
+      </div>
+    );
   }
 
   return (
-    <section id="activites" className="bg-light py-5">
-      <div className="container py-4">
+    <section id="activites" className="activities-section section">
+      <div className="container">
         <div className="text-center mb-5">
-          <h2 className="fw-bold text-primary">Nos activités</h2>
+          <span className="badge rounded-pill text-bg-warning mb-2">
+            🎉 Apprendre en s'amusant
+          </span>
+
+          <h2>Nos activités 🧩</h2>
+
           <p className="text-secondary">
-            Des activités ludiques adaptées à chaque âge.
+            Des moments de joie, de créativité et de découverte
+            adaptés à chaque âge.
           </p>
         </div>
 
         <div className="row g-4">
-          {activites.map((activite) => (
-            <div className="col-md-4" key={activite.id}>
-              <div className="card h-100 border-0 shadow-sm rounded-4 p-4 text-center">
-                <div className="display-5 mb-3">🧸</div>
-                <h3 className="h5 fw-bold">{activite.nom}</h3>
-                <p className="text-secondary mb-0">
-                  Âge recommandé : {activite.age}
-                </p>
+          {activites.map((activite, index) => {
+            const illustration =
+              illustrations[index % illustrations.length];
+
+            return (
+              <div className="col-md-6 col-lg-4" key={activite.id}>
+                <article className="activity-card">
+                  <img
+                    src={illustration.image}
+                    alt={illustration.alt}
+                    className="photo mb-3"
+                    style={{ height: "190px" }}
+                  />
+
+                  <div className="d-flex align-items-center gap-2 mb-3">
+                    <span className="fs-2">
+                      {illustration.icon}
+                    </span>
+
+                    <h3 className="mb-0">{activite.nom}</h3>
+                  </div>
+
+                  <p className="text-secondary mb-0">
+                    <strong>👶 Âge recommandé :</strong>{" "}
+                    {activite.age}
+                  </p>
+                </article>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+
+        {activites.length === 0 && (
+          <p className="text-center text-secondary">
+            Aucune activité disponible pour le moment.
+          </p>
+        )}
       </div>
     </section>
   );

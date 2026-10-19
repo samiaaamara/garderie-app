@@ -1,26 +1,475 @@
-@import "tailwindcss";
+
+@import "bootstrap/dist/css/bootstrap.min.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --blue: #164a72;
+  --blue-light: #eaf6ff;
+  --yellow: #ffd166;
+  --text: #344b60;
+  --muted: #6b7c8f;
+  --white: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 0;
+  background: var(--white);
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1140px;
+}
+
+/* Navigation */
+.navbar {
+  background: #fff;
+  padding: 14px 0;
+  box-shadow: 0 3px 18px rgba(22, 74, 114, 0.08);
+}
+
+.navbar-brand {
+  color: var(--blue) !important;
+  font-weight: 800;
+  font-size: 1.35rem;
+}
+
+.nav-link {
+  color: var(--blue) !important;
+  font-weight: 600;
+  margin: 0 8px;
+}
+
+.nav-link:hover {
+  color: #df9c00 !important;
+}
+
+/* Bouton principal */
+.btn-yellow {
+  display: inline-block;
+  border: none;
+  border-radius: 30px;
+  background: var(--yellow);
+  color: var(--blue);
+  padding: 12px 25px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.btn-yellow:hover {
+  background: #ffbd35;
+  color: var(--blue);
+  transform: translateY(-2px);
+}
+
+/* Bannière d'accueil */
+.hero {
+  padding: 65px 0;
+  background: linear-gradient(120deg, #e6f5ff, #fff8e8);
+}
+
+.hero h1 {
+  max-width: 540px;
+  margin-bottom: 20px;
+  color: var(--blue);
+  font-size: clamp(2.1rem, 4vw, 3.3rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.hero p {
+  max-width: 520px;
+  margin-bottom: 25px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* Sections */
+.section {
+  padding: 65px 0;
+}
+
+.section h2 {
+  margin-bottom: 12px;
+  color: var(--blue);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 800;
+}
+
+.section p {
+  line-height: 1.8;
+}
+
+.section .text-center > p {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Photos */
+.photo {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* Informations de la garderie */
+.info-section {
+  padding: 28px;
+  border: 1px solid #e0edf5;
+  border-radius: 22px;
+  background: #f1f9ff;
+}
+
+.info-section h2 {
+  color: var(--blue);
+}
+
+.info-section a:not(.btn-yellow) {
+  color: var(--blue);
+  overflow-wrap: anywhere;
+}
+
+/* Cartes de services et activités */
+.service-card,
+.activity-card {
+  height: 100%;
+  padding: 18px;
+  overflow: hidden;
+  border: 1px solid #e6edf2;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(22, 74, 114, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover,
+.activity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(22, 74, 114, 0.12);
+}
+
+.service-card h3,
+.activity-card h3 {
+  color: var(--blue);
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.service-card p,
+.activity-card p {
+  overflow-wrap: anywhere;
+}
+
+.activities-section {
+  background: #fff9ed;
+}
+
+/* Pied de page */
+footer {
+  margin-top: 0;
+  padding: 28px 15px;
+  background: var(--blue);
+  color: white;
+  text-align: center;
+}
+
+footer p {
+  margin-bottom: 0;
+}
+
+/* Affichage sur téléphone */
+@media (max-width: 767px) {
+  .hero {
+    padding: 38px 0;
+  }
+
+  .hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .section {
+    padding: 40px 0;
+  }
+
+  .info-section {
+    padding: 18px;
+  }
+
+  .photo {
+    height: 200px;
+  }
+
+  .service-card,
+  .activity-card {
+    padding: 14px;
+  }
+}
+
+/* =========================
+   NAVBAR - LE PETIT PRINCE
+========================= */
+
+.navbar {
+  z-index: 1030;
+}
+
+.navbar-brand {
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand-icon,
+.footer-brand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #fff0b8;
+  color: #24466b;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  color: #24466b;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.brand-name > span {
+  color: #e7a92e;
+}
+
+.brand-subtitle {
+  margin-top: 4px;
+  color: #8492a6;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.navbar .nav-link {
+  position: relative;
+  padding: 10px 12px !important;
+  color: #45546a;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: #e4a52b;
+}
+
+.btn-contact {
+  border: 2px solid #24466b;
+  background: #24466b;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.btn-contact:hover {
+  border-color: #e7b43e;
+  background: #e7b43e;
+  color: #24466b;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+  margin-top: 60px;
+  background: #193754;
+  color: #eaf1f8;
+}
+
+.footer-brand {
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.footer-brand:hover {
+  color: #ffe29a;
+}
+
+.footer-brand-icon {
+  background: #ffe29a;
+  color: #193754;
+}
+
+.footer-brand small {
+  margin-top: 5px;
+  color: #bdccdc;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.footer-description {
+  max-width: 360px;
+  color: #c5d2df;
+  line-height: 1.9;
+  font-size: 0.95rem;
+}
+
+.footer-decoration {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 226, 154, 0.35);
+  border-radius: 12px;
+  color: #ffe29a;
+  font-size: 0.9rem;
+}
+
+.footer-title {
+  position: relative;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.footer-title::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 42px;
+  height: 3px;
+  border-radius: 5px;
+  background: #f5ca68;
+  content: "";
+}
+
+.footer-links,
+.footer-contact {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-links li,
+.footer-contact li {
+  margin-bottom: 14px;
+  color: #c5d2df;
+  line-height: 1.7;
+  font-size: 0.93rem;
+}
+
+.footer-links a,
+.footer-contact a {
+  color: #c5d2df;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+  padding-left: 4px;
+  color: #ffe29a;
+}
+
+.footer-contact li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.contact-icon {
+  flex-shrink: 0;
+}
+
+.footer-button {
+  border: 1px solid #ffe29a;
+  background: #ffe29a;
+  color: #193754;
+  font-weight: 700;
+  padding: 10px 16px;
+  transition: all 0.25s ease;
+}
+
+.footer-button:hover {
+  border-color: #fff;
+  background: #fff;
+  color: #193754;
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  color: #bdccdc;
+  font-size: 0.85rem;
+}
+
+.footer-heart {
+  color: #ff9e9e;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    padding: 18px 0 8px;
+  }
+
+  .navbar .nav-link {
+    padding: 12px 4px !important;
+  }
+
+  .btn-contact {
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .brand-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+  }
+
+  .brand-name {
+    font-size: 1.05rem;
+  }
+
+  .site-footer {
+    margin-top: 35px;
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
 }

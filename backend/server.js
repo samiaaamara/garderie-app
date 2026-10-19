@@ -11,7 +11,7 @@ app.use(express.json());
 // Informations générales sur la garderie
 app.get("/api/garderie", (req, res) => {
   res.json({
-    nom: "Les Petits Explorateurs",
+   nom: "Le Petit Prince",
     description:
       "Une garderie chaleureuse et sécurisée pour accompagner le développement des enfants.",
     adresse: "Tozeur, Tunisie",
